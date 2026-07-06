@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e8fd72c1ea8a6e4db3e404fd9c99b26, type: 3}
+  m_Name: MarkerContentLibrary
+  m_EditorClassIdentifier: 
+  _mappings:
+  - symbolId: 0
+    modelPrefab: {fileID: 7070926322147199363, guid: 4608c047fb47d904190683109373100f, type: 3}
+    lostPolicy: 0
+    smoothTime: 0.1
+    hideDelay: 1

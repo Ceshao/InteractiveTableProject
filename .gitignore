@@ -77,3 +77,10 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Build output
+[Rr]elease/
+
+# 大体积源模型不入库（本地保留，见 doc 设计文档说明）
+/InteractiveTableProject/Assets/Model/
+/InteractiveTableProject/Assets/Model.meta

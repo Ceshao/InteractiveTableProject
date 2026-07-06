@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/TUIO 1.1 Example Scene.unity
+    guid: 1b2b63c582159c743905d5232cfc90da
   m_configObjects: {}
