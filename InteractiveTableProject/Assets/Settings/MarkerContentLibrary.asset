@@ -18,3 +18,16 @@ MonoBehaviour:
     lostPolicy: 0
     smoothTime: 0.1
     hideDelay: 1
+    syncRotation: 1
+  - symbolId: 1
+    modelPrefab: {fileID: 5251195786793566492, guid: 180907e620947e54cb81b57e8a1a50e0, type: 3}
+    lostPolicy: 0
+    smoothTime: 0.1
+    hideDelay: 1
+    syncRotation: 1
+  - symbolId: 2
+    modelPrefab: {fileID: 4702113120536309688, guid: e4296d6df0bb6544f913fe1a2436227c, type: 3}
+    lostPolicy: 0
+    smoothTime: 0.1
+    hideDelay: 1
+    syncRotation: 1
