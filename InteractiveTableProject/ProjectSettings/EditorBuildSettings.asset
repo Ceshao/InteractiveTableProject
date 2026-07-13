@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/TUIO 1.1 Example Scene.unity
-    guid: 1b2b63c582159c743905d5232cfc90da
+    path: Assets/Scenes/Bootstrap.unity
+    guid: e9100574e48175b4284f5d5b71bae4ba
+  - enabled: 1
+    path: Assets/Scenes/TableUI.unity
+    guid: 8c05b51521c342643877a9e3a4742b4a
+  - enabled: 1
+    path: Assets/Scenes/Projection.unity
+    guid: 5b3dfb27e6e88ee4fbdce2885cd56abe
   m_configObjects: {}

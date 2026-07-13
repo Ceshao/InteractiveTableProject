@@ -1,17 +1,16 @@
 using TangibleTable.Config;
 using TangibleTable.Core;
-using TuioNet.Tuio11;
 using UnityEngine;
 
 namespace TangibleTable.Presentation
 {
     /// <summary>
-    /// 表现层：让模型跟随一个 TUIO Object。由 MarkerModelManager 在实例化 Prefab 时挂载并驱动，
-    /// Prefab 本身无需预挂任何脚本。
+    /// 表现层：让模型跟随一个 ITrackedMarker（活句柄，来源可以是 TUIO 直连或远程转发）。
+    /// 由 MarkerModelManager 在实例化 Prefab 时挂载并驱动，Prefab 本身无需预挂任何脚本。
     /// </summary>
     public class TrackedModelController : MonoBehaviour
     {
-        private Tuio11Object _tuioObject;
+        private ITrackedMarker _marker;
         private MarkerMapping _mapping;
         private Camera _camera;
         private float _depth;
@@ -28,16 +27,16 @@ namespace TangibleTable.Presentation
             _baseRotation = transform.rotation;
         }
 
-        public void OnMarkerFound(Tuio11Object tuioObject)
+        public void OnMarkerFound(ITrackedMarker marker)
         {
-            _tuioObject = tuioObject;
+            _marker = marker;
             _isTracking = true;
             gameObject.SetActive(true);
         }
 
         public void OnMarkerLost()
         {
-            _tuioObject = null;
+            _marker = null;
             _isTracking = false;
             _lostTime = Time.time;
             if (_mapping.lostPolicy == MarkerLostPolicy.Hide)
@@ -48,15 +47,14 @@ namespace TangibleTable.Presentation
         {
             if (_isTracking)
             {
-                var tuioPos = new Vector2(_tuioObject.Position.X, _tuioObject.Position.Y);
-                var target = TuioWorldMapper.ToWorld(_camera, tuioPos, _depth);
+                var target = TuioWorldMapper.ToWorld(_camera, _marker.Position, _depth);
                 transform.position = Vector3.SmoothDamp(
                     transform.position, target, ref _velocity, _mapping.smoothTime);
 
                 if (_mapping.syncRotation)
                 {
                     // 转盘式：方块在桌面上的转角 → 模型绕世界竖直轴旋转
-                    var angleDeg = Mathf.Rad2Deg * _tuioObject.Angle;
+                    var angleDeg = Mathf.Rad2Deg * _marker.Angle;
                     var targetRotation = Quaternion.AngleAxis(angleDeg, Vector3.up) * _baseRotation;
                     var t = 1f - Mathf.Exp(-Time.deltaTime / Mathf.Max(_mapping.smoothTime, 1e-4f));
                     transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, t);
