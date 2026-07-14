@@ -34,6 +34,8 @@ namespace TangibleTable.TableUI
         private void OnEnable()
         {
             if (_source == null) return;
+            _port = MarkerWireProtocol.ResolvePort(_port);
+            Debug.Log($"[MarkerStateBroadcaster] 转发目标 {_host}:{_port}");
             _sender = new UdpJsonSender(_host, _port);
             _source.MarkerAdded += HandleAdded;
             _source.MarkerRemoved += HandleRemoved;

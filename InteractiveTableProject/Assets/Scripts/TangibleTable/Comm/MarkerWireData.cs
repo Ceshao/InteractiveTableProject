@@ -52,5 +52,23 @@ namespace TangibleTable.Comm
             try { return JsonUtility.FromJson<TypeProbe>(json)?.type; }
             catch { return null; }
         }
+
+        /// <summary>
+        /// 命令行 -port N 覆盖端口（现场 3334 被占用时不用重新打包）。
+        /// 无参数或解析失败时返回 fallback（Inspector 序列化值）。
+        /// </summary>
+        public static int ResolvePort(int fallback)
+        {
+            var args = Environment.GetCommandLineArgs();
+            for (var i = 0; i < args.Length - 1; i++)
+            {
+                if (!args[i].Equals("-port", StringComparison.OrdinalIgnoreCase)) continue;
+                if (int.TryParse(args[i + 1], out var port) && port >= 1 && port <= 65535)
+                    return port;
+                Debug.LogWarning($"[MarkerWireProtocol] -port 参数无效：\"{args[i + 1]}\"，改用默认端口 {fallback}。");
+                return fallback;
+            }
+            return fallback;
+        }
     }
 }

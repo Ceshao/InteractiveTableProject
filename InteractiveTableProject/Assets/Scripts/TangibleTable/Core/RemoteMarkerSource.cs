@@ -47,10 +47,12 @@ namespace TangibleTable.Core
 
         private void OnEnable()
         {
+            _port = MarkerWireProtocol.ResolvePort(_port);
             try
             {
                 _receiver = new UdpJsonReceiver(_port);
                 _listenError = null;
+                Debug.Log($"[RemoteMarkerSource] 监听 UDP:{_port}");
             }
             catch (Exception exception)
             {
