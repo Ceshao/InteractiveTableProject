@@ -115,6 +115,9 @@ namespace TangibleTable.EditorTools
             SetRef(broadcaster, "_markerSourceBehaviour", source);
             SetRef(broadcaster, "_detector", detector);
 
+            // 现场适配：F2 切换 X 镜像（reacTIVision invert="x" 的场地）
+            new GameObject("Mirror Hotkey", typeof(MirrorToggleHotkey));
+
             EditorSceneManager.SaveScene(scene, TableUiPath);
         }
 

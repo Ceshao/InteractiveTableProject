@@ -62,7 +62,12 @@ namespace TangibleTable.Core
             public TuioTrackedMarker(Tuio11Object obj) => _obj = obj;
 
             public int SymbolId => (int)_obj.SymbolId;
-            public Vector2 Position => new(_obj.Position.X, _obj.Position.Y);
+
+            // 在数据入口做 X 镜像，桌面光标、按钮命中、转发投影的坐标一次性全部修正
+            public Vector2 Position => new(
+                MarkerInputMirror.InvertX ? 1f - _obj.Position.X : _obj.Position.X,
+                _obj.Position.Y);
+
             public float Angle => _obj.Angle;
         }
     }
